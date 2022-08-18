@@ -51,3 +51,97 @@
 - Pwntools：https://github.com/Gallopsled/pwntools
 
 ### Reverse
+
+- ExEinfo PE：查看PE文件信息 
+
+- Cutter：https://cutter.re/
+- IDA：https://hex-rays.com/ida-pro/
+- Ollydbg：https://www.ollydbg.de/
+- angr：二进制分析 https://github.com/angr/angr
+
+## CTF   命令速查
+
+### Reverse
+
+#### IDA快捷键
+
+##### 切换文本视图与图表视图
+
+```
+空格键
+```
+
+##### 返回上一个操作地址
+
+```
+ESC
+```
+
+##### 搜索地址和符号
+
+```
+G
+```
+
+##### 对符号进行重命名
+
+```
+N
+```
+
+##### 常规注释
+
+```
+冒号
+```
+
+##### 可重复注释
+
+```
+分号
+```
+
+##### 添加标签
+
+```
+Alt+M
+```
+
+##### 查看标签
+
+```
+Ctrl+M
+```
+
+##### 查看段的信息
+
+```
+Ctrl+S
+```
+
+##### 查看交叉应用
+
+```
+X
+```
+
+##### 查看伪代码
+
+```
+F5
+```
+
+##### 搜索文本
+
+```
+Alt+T
+```
+
+##### 搜索十六进制
+
+```
+Alt+B
+```
+
+
+
