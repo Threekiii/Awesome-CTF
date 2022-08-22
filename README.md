@@ -27,7 +27,9 @@
 - GB2312：http://code.mcdvisa.com/
 - Unicode字符表：https://www.52unicode.com/enclosed-alphanumerics-zifu
 - Unicode：https://www.compart.com/en/unicode/
+
 - UUencode：http://web.chacuo.net/charsetuuencode
+- XXencode：输入文本以每三个字节为单位进行编码 http://web.chacuo.net/charsetxxencode
 - Escape/Unescape：https://tool.chinaz.com/tools/escape.aspx
 - HTML实体编码：https://zh.rakko.tools/tools/21/
 - 摩斯电码：http://moersima.00cha.net/
@@ -35,14 +37,19 @@
 - 栅栏密码：https://www.qqxiuzi.cn/bianma/zhalanmima.php
 - 猪圈密码：http://www.hiencode.com/pigpen.html
 - 零宽字符：http://330k.github.io/misc_tools/unicode_steganography.html
+- Base64填充位隐写读取：https://github.com/cjcslhp/wheels/tree/master/b64stego
 
 ### Misc
 
+- 010 Editor：https://www.sweetscape.com/010editor/
 - Binwalk：https://github.com/ReFirmLabs/binwalk
-- Stegsolve：图片隐写 http://www.caesum.com/handbook/stego.htm
-- Audacity：音频隐写 https://www.audacityteam.org/
+- Stegsolve：图片隐写 http://www.caesum.com/handbook/stego.ht
 - 图虫EXIF查看器：https://exif.tuchong.com/
 - 盲水印提取：https://github.com/chishaxie/BlindWaterMark
+- OCR在线识别：https://web.baimiaoapp.com/
+- Audacity：音频隐写 https://www.audacityteam.org/
+- Mp3Stego：Mp3音频隐写 https://www.petitcolas.net/steganography/mp3stego/
+- Pcap流量包在线修复：http://f00l.de/hacking/pcapfix.php
 
 ### Web
 
@@ -62,6 +69,107 @@
 - angr：二进制分析 https://github.com/angr/angr
 
 ## Cheatsheet
+
+### Misc
+
+#### tshark流量分析
+
+```
+tshark -r **.pcap –Y ** -T fields –e ** | **** > data
+----------------------------------------------------------------
+tshark -r capture.pcapng -T fields -e usb.capdata > data2.txt
+```
+
+```
+Usage:
+  -Y <display filter>      packet displaY filter in Wireshark display filter
+                           syntax
+  -T pdml|ps|psml|json|jsonraw|ek|tabs|text|fields|?
+                           format of text output (def: text)
+  -e <field>               field to print if -Tfields selected (e.g. tcp.port,
+                           _ws.col.Info)
+```
+
+通过`-Y`过滤器 (与 wireshark 一致), 然后用`-T filds -e`配合指定显示的数据段 (比如 usb.capdata)
+
+`-e`后的参数不确定可以由 `wireshark` 右击需要的数据选中后得到
+
+#### Unicode四种编码形式
+
+源文本：The
+
+```
+&#x [Hex]: &#x0054;&#x0068;&#x0065;
+&# [Decimal]: &#00084;&#00104;&#00101;
+\U [Hex]: \U0054\U0068\U0065
+\U+ [Hex]: \U+0054\U+0068\U+0065
+```
+
+#### zip伪加密
+
+zip文件组成：
+
+- 压缩源文件数据区 50 4B 03 04（0x04034b50）
+- 压缩源文件目录区 50 4B 01 02（0x02014b50）
+- 压缩源文件目录结束标志50 4B 05 06（0x06054b50）
+
+压缩源文件数据区：
+
+```
+50 4B 03 04：这是头文件标记（0x04034b50）
+14 00：解压文件所需 pkware 版本
+09 00：全局方式位标记（有无加密）
+08 00：压缩方式
+50 A3：最后修改文件时间
+A5 4A：最后修改文件日期
+21 38 76 64：CRC-32校验（1480B516）
+19 00 00 00：压缩后尺寸（25）
+17 00 00 00：未压缩尺寸（23）
+08 00：文件名长度
+00 00：扩展记录长度
+```
+
+压缩源文件目录区：
+
+```
+50 4B 01 02：目录中文件文件头标记(0x02014b50)
+1F 00：压缩使用的 pkware 版本
+14 00：解压文件所需 pkware 版本
+09 00：全局方式位标记（有无加密，这个更改这里进行伪加密，改为09 00打开就会提示有密码了）
+08 00：压缩方式
+50 A3：最后修改文件时间
+A5 4A：最后修改文件日期
+21 38 76 65：CRC-32校验（1480B516）
+19 00 00 00：压缩后尺寸（25）
+17 00 00 00：未压缩尺寸（23）
+08 00：文件名长度
+24 00：扩展字段长度
+00 00：文件注释长度
+00 00：磁盘开始号
+00 00：内部文件属性
+20 00 00 00：外部文件属性
+00 00 00 00：局部头部偏移量
+```
+
+真假加密：
+
+```
+# 无加密 
+压缩源文件数据区的全局加密应当为00 00
+且压缩源文件目录区的全局方式位标记应当为00 00
+```
+
+```
+# 假加密
+压缩源文件数据区的全局加密应当为00 00
+且压缩源文件目录区的全局方式位标记应当为09 00
+```
+
+```
+# 真加密
+压缩源文件数据区的全局加密应当为09 00
+且压缩源文件目录区的全局方式位标记应当为09 00
+```
 
 ### Web
 
