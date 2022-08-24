@@ -22,12 +22,10 @@
 - CTF在线工具：http://www.hiencode.com/
 - XSSEE：在线综合编解码 https://evilcos.me/lab/xssee/
 - MeTools：在线综合编解码 http://www.metools.info/code/quotedprintable231.html
-
 - MD5 Hash：https://www.somd5.com/
 - GB2312：http://code.mcdvisa.com/
 - Unicode字符表：https://www.52unicode.com/enclosed-alphanumerics-zifu
 - Unicode：https://www.compart.com/en/unicode/
-
 - UUencode：http://web.chacuo.net/charsetuuencode
 - XXencode：输入文本以每三个字节为单位进行编码 http://web.chacuo.net/charsetxxencode
 - Escape/Unescape：https://tool.chinaz.com/tools/escape.aspx
@@ -62,7 +60,6 @@
 ### Reverse
 
 - ExEinfo PE：查看PE文件信息 
-
 - Cutter：https://cutter.re/
 - IDA：https://hex-rays.com/ida-pro/
 - Ollydbg：https://www.ollydbg.de/
