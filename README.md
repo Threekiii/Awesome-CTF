@@ -36,6 +36,7 @@
 - 猪圈密码：http://www.hiencode.com/pigpen.html
 - 零宽字符：http://330k.github.io/misc_tools/unicode_steganography.html
 - Base64填充位隐写读取：https://github.com/cjcslhp/wheels/tree/master/b64stego
+- yafu：RSA解题中的因式分解 https://github.com/bbuhrow/yafu
 
 ### Misc
 
