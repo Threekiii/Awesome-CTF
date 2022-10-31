@@ -1,13 +1,14 @@
 # Awesome-CTF
 **【免责声明】本仓库所涉及的技术、思路和工具仅供安全技术研究，任何人不得将其用于非授权渗透测试，不得将其用于非法用途和盈利，否则后果自行承担。**
 
-## CTF平台
+## CTF项目
 
 - CTF Wiki：https://ctf-wiki.org/
 - CTF Time：https://ctftime.org/
 - 攻防世界：https://adworld.xctf.org.cn/
 - Hacker 101：https://www.hacker101.com/
 - Cryptopals：密码学练习题目 https://cryptopals.com/
+- Awesome-ctf：https://github.com/apsdehal/awesome-ctf
 
 ## CTF工具
 
@@ -43,11 +44,13 @@
 #### 图片
 
 - Stegsolve：图片隐写 http://www.caesum.com/handbook/stego.ht
-- 图虫EXIF查看器：https://exif.tuchong.com/
+- 图虫在线EXIF查看器：https://exif.tuchong.com/
+- EXIF查看器：exiftool https://exiftool.org/
 - 盲水印提取：https://github.com/chishaxie/BlindWaterMark
 - OCR在线识别：https://web.baimiaoapp.com/
 - 解决拼图问题：montage+gaps https://github.com/nemanja-m/gaps
 - 在线绘制二维码/汉信码：https://www.pixilart.com/draw?ref=home-page
+- 在线绘制二维码：https://merricx.github.io/qrazybox/
 - 在线扫描一维码：https://online-barcode-reader.inliteresearch.com/
 
 #### 音视频
@@ -58,6 +61,11 @@
 #### 流量分析
 
 - Pcap流量包在线修复：http://f00l.de/hacking/pcapfix.php
+
+#### 日志分析
+
+- ProcessMonitor：进程监视器 https://learn.microsoft.com/zh-cn/sysinternals/downloads/procmon
+- Event log explorer：日志查看器 https://www.eventlogxp.com/
 
 #### 数据处理
 
@@ -156,12 +164,12 @@ find / -type f -name '*' | xargs grep "flag{"
 
 ##### 银行卡号（BankCard）
 
-- 银行卡的长度限制在16-19位。一般信用卡的长度为16位，借记卡的长度为19位。
+- 银行卡的长度限制在13-19位。
 - 银行卡号一般有五部分组成：发卡机构标识代码（BIN）、地区代码、卡种类码、顺序码、校验码。
 - 校验码采用Luhn算法计算。
 
 ```
-/^([1-9]{1})(\d{15}|\d{18})$/
+/^([1-9]{1})(\d{12}|\d{18})$/
 ```
 
 ##### IP地址（IPv4）
@@ -301,6 +309,20 @@ A5 4A：最后修改文件日期
 且压缩源文件目录区的全局方式位标记应当为09 00
 ```
 
+#### Windows日志分析
+
+##### 常见安全事件
+
+- 检索4624/4625登录事件，爆破时间点与登录事件点一一对应的可能是异常账户。
+
+```
+4624  --登录成功   
+4625  --登录失败  
+4634 -- 注销成功
+4647 -- 用户启动的注销   
+4672 -- 使用超级用户（如管理员）进行登录
+```
+
 ### Web
 
 #### localhost绕过
@@ -396,3 +418,4 @@ index.php?path=php://filter/read=convert.base64-encode/resource=flag.php
 - 二维码010101绘制：
   - [qrcode_painter_1.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/qrcode_painter_1.py)
   - [qrcode_painter_2.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/qrcode_painter_2.py)
+
