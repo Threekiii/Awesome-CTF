@@ -91,6 +91,8 @@
 
 ## Cheatsheet
 
+### Tips
+
 #### 搜索flag
 
 ```
@@ -102,6 +104,31 @@ find / -type f -name '*' | xargs grep "flag{"
 ```
 
 ### Misc
+
+#### 常用命令
+
+##### file
+
+- 在文件无格式或格式不明时判断文件类型。
+
+```
+➜  ~ file Exploit.class
+Exploit.class: compiled Java class data, version 52.0 (Java 1.8)
+```
+
+##### binwalk & foremost
+
+- 分离提取隐写的文件。
+
+##### dd
+
+- 用于读取、转换并输出数据。
+
+##### openssl
+
+```
+openssl rsautl -decrypt -in whoami.txt -inkey private.key out flag.txt
+```
 
 #### 常用正则表达式
 
@@ -210,6 +237,70 @@ find / -type f -name '*' | xargs grep "flag{"
 ^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$
 ```
 
+#### wireshark流量分析
+
+- 过滤IP：
+
+```
+ip.src eq xxx.xxx.xxx.xxx or ip.dst eq xxx.xxx.xxx.xxx
+```
+
+```
+ip.addr eq xxx.xxx.xxx.xxx
+```
+
+- 过滤端口：
+
+```
+tcp.port eq 80 or udp.port eq 80
+```
+
+```
+tcp.dstport == 80 or tcp.srcport == 80
+```
+
+```
+tcp.port >=1 and tcp.port <=80
+```
+
+- 过滤协议：
+
+```
+tcp/udp/arp/icmp/http/ftp/dns/ip
+```
+
+- 过滤MAC：
+
+```
+eth.dst == A0:04:C6:85:63:73
+```
+
+- HTTP过滤：
+
+```
+http.request.method == "GET"
+```
+
+```
+http.request.method == "POST"
+```
+
+```
+http.request.uri == "/img/logo.png"
+```
+
+```
+http contains "GET"
+```
+
+```
+http contains "HTTP/1."
+```
+
+```
+http.request.method == "GET" && http contains "User-Agent:"
+```
+
 #### tshark流量分析
 
 ```
@@ -242,6 +333,48 @@ Usage:
 \U [Hex]: \U0054\U0068\U0065
 \U+ [Hex]: \U+0054\U+0068\U+0065
 ```
+
+#### 图片分析
+
+图片分析的一般步骤：
+
+1. 首先查看EXIF信息。
+2. 如果图片在windows下能查看，kali下无法查看，说明格式数据错误，可以修改图片的长宽高来显示隐藏图像。
+3. 通过binwalk或者foremost查看是否有隐藏文件。
+4. 通过stegsolve进行色差分析，查看zlib数据段。
+5. 查看文件是否包含有损坏的其他文件，查找文件中是否有可疑字符串，例如flag、key、pass。
+6. 验证是否存在隐写，例如LSB隐写。
+
+##### jpg长宽修改
+
+```
+修改图片高度， FF C0后的第4个字节和第5个字节
+```
+
+##### png长宽修改
+
+```
+修改0x14到0x17的四个字节
+```
+
+![image-20221115155926964](https://typora-notes-1308934770.cos.ap-beijing.myqcloud.com/202211151559069.png)
+
+修改后：
+
+![image-20221115160008245](https://typora-notes-1308934770.cos.ap-beijing.myqcloud.com/202211151600283.png)
+
+#### 压缩包分析
+
+不同压缩包分析方法分别用于：
+
+1. **ZIP暴力破解**：文件的密码为纯数字且位数不多时。
+2. **ZIP伪加密**：ZIP文件的压缩源文件目录中09 00修改为00 00，可以成功解压时。
+3. **CRC32攻击**：当文件数据少且文件大小较小时。
+4. **明文攻击**：加密文件中存在部分已知文件（>12字节）时。
+
+一些tips：
+
+- 文件打不开，显示“压缩文件已损坏”时，尝试winrar工具中的修复功能进行修复。
 
 #### zip伪加密
 
@@ -298,6 +431,8 @@ A5 4A：最后修改文件日期
 01 00：本磁盘上纪录总数
 01 00：目录区中纪录总数
 59 00 00 00：目录区尺寸大小
+3E 00 00 00 00：目录区对第一张磁盘的偏移量
+00 00：ZIP文件注释长度
 ```
 
 真假加密：
@@ -318,6 +453,12 @@ A5 4A：最后修改文件日期
 # 真加密
 压缩源文件数据区的全局加密应当为09 00
 且压缩源文件目录区的全局方式位标记应当为09 00
+```
+
+##### 判断伪加密 ZipCenOp
+
+```
+java -jar ZipCenOp.jar xxx.zip
 ```
 
 #### Windows日志分析
