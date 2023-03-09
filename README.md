@@ -41,22 +41,39 @@
 - yafu：RSA解题中的因式分解 https://github.com/bbuhrow/yafu
 - factordb：在线大数分解数据库 http://factordb.com/
 - ctfcode：随波逐流工作室 CTF编码工具 http://1o1o.xyz/bo_ctfcode.html
+- quipqiup：在线古典密码词频爆破 https://www.quipqiup.com/
 
 ### Misc
 
-#### 图片
+#### 图片隐写
 
-- Stegsolve：图片隐写 http://www.caesum.com/handbook/stego.ht
-- Stegonline：在线图片隐写 https://stegonline.georgeom.net/upload
-- Ezgif：在线分帧 https://ezgif.com/split
+- Stegsolve：图片隐写查看器 http://www.caesum.com/handbook/stego.ht
+- Stegonline：Stegsolve在线版 https://stegonline.georgeom.net/upload
+- F5-steganography：隐写工具 https://github.com/matthewgao/F5-steganography
+- OutGuess：隐写工具 https://github.com/crorvick/outguess
+- Silenteye：隐写工具 https://achorein.github.io/silenteye/
+- zsteg：检测PNG和BMP图片隐写数据 https://github.com/zed-0xff/zsteg
+- PNGDebugger：读取png文件头，检查CRC https://github.com/rvong/png-debugger#pngdebugger
+
+#### 图片EXIF
+
 - 图虫在线EXIF查看器：https://exif.tuchong.com/
 - EXIF查看器：exiftool https://exiftool.org/
-- 盲水印提取：https://github.com/chishaxie/BlindWaterMark
-- OCR在线识别：https://web.baimiaoapp.com/
-- 解决拼图问题：montage+gaps https://github.com/nemanja-m/gaps
+- Magicexif元数据编辑器：https://www.magicexif.com/
+- TweakPNG：png图像编辑器，修改元数据 https://entropymine.com/jason/tweakpng/
+
+#### 二维码
+
 - 在线绘制二维码/汉信码：https://www.pixilart.com/draw?ref=home-page
 - 在线绘制二维码：https://merricx.github.io/qrazybox/
 - 在线扫描一维码：https://online-barcode-reader.inliteresearch.com/
+
+#### 图片杂项
+
+- Ezgif：在线分帧 https://ezgif.com/split
+- 盲水印提取：https://github.com/chishaxie/BlindWaterMark
+- OCR在线识别：https://web.baimiaoapp.com/
+- 解决拼图问题：montage+gaps https://github.com/nemanja-m/gaps
 
 #### 音视频
 
@@ -66,6 +83,7 @@
 #### 流量分析
 
 - Pcap流量包在线修复：http://f00l.de/hacking/pcapfix.php
+- knm：鼠标键盘流量包取证 https://github.com/FzWjScJ/knm
 
 #### 日志分析
 
@@ -78,11 +96,20 @@
 - Binwalk：https://github.com/ReFirmLabs/binwalk
 - 在线正则表达式：https://c.runoob.com/front-end/854/
 
+#### 密码破解
+
+- Advanced Office Password Recovery（AOPR）：破解office文档密码 https://www.elcomsoft.com/aopr.html
+- Advanced Archive Password Recovery（ARCHPR）：破解zip和rar文件密码 https://www.elcomsoft.com/archpr.html
+- crc32：CRC32爆破 https://github.com/theonlypwner/crc32
+- ZipCenOp：zip伪加密破解 
+- Ziperello：zip压缩包密码破解
+
 ### Web
 
 - localhost绕过：127.0.0.1  >>> 2130706433 https://www.browserling.com/tools/ip-to-dec
 - .git 信息泄露：https://github.com/BugScanTeam/GitHack
 - .svn/.hg/.cvs 信息泄露：https://github.com/kost/dvcs-ripper
+- D盾：Webshell查杀 https://www.d99net.net/
 
 ### Pwn
 
@@ -378,6 +405,20 @@ Usage:
 通过`-Y`过滤器 (与 wireshark 一致), 然后用`-T filds -e`配合指定显示的数据段 (比如 usb.capdata)
 
 `-e`后的参数不确定可以由 `wireshark` 右击需要的数据选中后得到
+
+配合python使用：
+
+```python
+from os import system
+
+system("tshark -r icmp_data.pcap -Y \"icmp && icmp.type==8\" -T fields -e data > flag.txt")
+f = open('flag.txt', 'r')
+flag = ''
+for line in f.readlines():
+    flag += chr(int(line[16:18], 16))
+print(flag)
+f.close()
+```
 
 #### Unicode四种编码形式
 
