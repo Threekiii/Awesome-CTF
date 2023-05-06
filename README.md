@@ -114,15 +114,23 @@
 ### Pwn
 
 - Pwntools：CTF框架和漏洞利用开发库 https://github.com/Gallopsled/pwntools
+- Pwndbg：GDB 插件 https://github.com/pwndbg/pwndbg
+- ROPgadget：返回导向式编程 寻找 Gadget https://github.com/JonathanSalwan/ROPgadget
+- Ropper：返回导向式编程 寻找 Gadget https://github.com/sashs/Ropper
 
 ### Reverse
 
-- ExEinfo PE：查看PE文件信息
-- PEID：查壳工具 
+- ExeinfoPE：查壳工具 https://github.com/ExeinfoASL/ASL/raw/master/exeinfope.zip
+- PEiD：查壳工具 https://www.aldeid.com/wiki/PEiD
+- UPX：脱壳工具 https://github.com/upx/upx
 - Cutter：https://cutter.re/
 - IDA：https://hex-rays.com/ida-pro/
+- x64DBG：https://x64dbg.com/
 - Ollydbg：https://www.ollydbg.de/
+- bindiff：二进制比对工具 https://www.zynamics.com/software.html
 - angr：二进制分析 https://github.com/angr/angr
+- sig-database：IDA FLIRT 签名库 https://github.com/push0ebp/sig-database
+- FLIRTDB：IDA FLIRT 签名库 https://github.com/Maktm/FLIRTDB
 
 ### 其他
 
@@ -131,16 +139,6 @@
 ## Cheatsheet
 
 ### Tips
-
-#### 搜索flag
-
-```
-grep -rn “flag{” /*
-```
-
-```
-find / -type f -name '*' | xargs grep "flag{"
-```
 
 #### MD5碰撞
 
