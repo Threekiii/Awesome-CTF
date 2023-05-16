@@ -42,6 +42,7 @@
 - factordb：在线大数分解数据库 http://factordb.com/
 - ctfcode：随波逐流工作室 CTF编码工具 http://1o1o.xyz/bo_ctfcode.html
 - quipqiup：在线古典密码词频爆破 https://www.quipqiup.com/
+- 在线求解线性方程组：http://www.yunsuan.info/matrixcomputations/solvelinearsystems.html  
 
 ### Misc
 
@@ -93,6 +94,8 @@
 #### 数据处理
 
 - 010 Editor：https://www.sweetscape.com/010editor/
+  - 010 Editor 插件模板下载：例如 ELF.bt https://www.sweetscape.com/010editor/repository/templates/
+
 - Binwalk：https://github.com/ReFirmLabs/binwalk
 - 在线正则表达式：https://c.runoob.com/front-end/854/
 
@@ -103,6 +106,10 @@
 - crc32：CRC32爆破 https://github.com/theonlypwner/crc32
 - ZipCenOp：zip伪加密破解 
 - Ziperello：zip压缩包密码破解
+
+#### 其他
+
+- 在线正则英语单词：https://regdict.com/
 
 ### Web
 
@@ -117,6 +124,8 @@
 - Pwndbg：GDB 插件 https://github.com/pwndbg/pwndbg
 - ROPgadget：返回导向式编程 寻找 Gadget https://github.com/JonathanSalwan/ROPgadget
 - Ropper：返回导向式编程 寻找 Gadget https://github.com/sashs/Ropper
+- idaplugins-list：IDA 插件 https://github.com/onethawt/idaplugins-list
+- gdb-dashboard：GDB 插件 https://github.com/cyrus-and/gdb-dashboard
 
 ### Reverse
 
@@ -131,6 +140,7 @@
 - angr：二进制分析 https://github.com/angr/angr
 - sig-database：IDA FLIRT 签名库 https://github.com/push0ebp/sig-database
 - FLIRTDB：IDA FLIRT 签名库 https://github.com/Maktm/FLIRTDB
+- pyinstxtractor：https://github.com/extremecoders-re/pyinstxtractor  
 
 ### 其他
 
