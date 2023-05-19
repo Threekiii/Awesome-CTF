@@ -439,6 +439,20 @@ f.close()
 \U+ [Hex]: \U+0054\U+0068\U+0065
 ```
 
+#### 图片拼接
+
+沿水平方向拼接：
+
+```
+convert -append *.png ../flag.png
+```
+
+沿垂直方向拼接：
+
+```
+convert +append *.png ../flag.png
+```
+
 #### 图片分析
 
 图片分析的一般步骤：
@@ -997,7 +1011,10 @@ sh.interactive()
 
 ## Scripts
 
-- 分割图片恢复原图：[image_merge.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/image_merge.py)
+- 分割图片恢复原图：
+  - [image_merge1.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/image_merge1.py)
+  - [image_merge2.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/image_merge2.py)
+
 - 二维码010101绘制：
   - [qrcode_painter_1.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/qrcode_painter_1.py)
   - [qrcode_painter_2.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/qrcode_painter_2.py)
