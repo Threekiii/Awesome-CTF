@@ -1,7 +1,7 @@
 # Awesome-CTF
 **【免责声明】本仓库所涉及的技术、思路和工具仅供安全技术研究，任何人不得将其用于非授权渗透测试，不得将其用于非法用途和盈利，否则后果自行承担。**
 
-## CTF项目
+## 开源导航
 
 - CTF Wiki：https://ctf-wiki.org/
 - CTF Hub：https://www.ctfhub.com/
@@ -10,20 +10,37 @@
 - Hacker 101：https://www.hacker101.com/
 - Cryptopals：密码学练习题目 https://cryptopals.com/
 - Awesome-ctf：https://github.com/apsdehal/awesome-ctf
+- CTF Tools：https://github.com/zardus/ctf-tools
+- 近期赛事：https://su-sanha.cn/events/ API：http://event.ctf.probius.xyz/cn_CTF
 
-## CTF工具
+## Crypto
 
 ### 综合工具
 
-- CTF Tools：https://github.com/zardus/ctf-tools
-
-### Crypto
-
 - CyberChef：综合编解码及加密，可本地部署 https://github.com/gchq/CyberChef
 - OK Tools在线工具：https://github.com/wangyiwy/oktools
-- CTF在线工具：http://www.hiencode.com/
+- CTF 在线工具：http://www.hiencode.com/
+- ctfcode：随波逐流工作室 CTF编码工具 http://1o1o.xyz/bo_ctfcode.html
 - XSSEE：在线综合编解码 https://evilcos.me/lab/xssee/
 - MeTools：在线综合编解码 http://www.metools.info/code/quotedprintable231.html
+
+### 密码学
+
+- 摩斯电码：http://moersima.00cha.net/
+- 摩斯电码：http://www.zhongguosou.com/zonghe/moersicodeconverter.aspx
+- 栅栏密码：https://www.qqxiuzi.cn/bianma/zhalanmima.php
+- 猪圈密码：http://www.hiencode.com/pigpen.html
+- 零宽字符：http://330k.github.io/misc_tools/unicode_steganography.html
+- quipqiup：在线古典密码词频爆破 https://www.quipqiup.com/
+
+### 数学计算
+
+- yafu：RSA解题中的因式分解 https://github.com/bbuhrow/yafu
+- factordb：在线大数分解数据库 http://factordb.com/
+- 在线求解线性方程组：http://www.yunsuan.info/matrixcomputations/solvelinearsystems.html  
+
+### 编解码
+
 - MD5 Hash：https://www.somd5.com/
 - GB2312：http://code.mcdvisa.com/
 - Unicode字符表：https://www.52unicode.com/enclosed-alphanumerics-zifu
@@ -32,19 +49,11 @@
 - XXencode：输入文本以每三个字节为单位进行编码 http://web.chacuo.net/charsetxxencode
 - Escape/Unescape：https://tool.chinaz.com/tools/escape.aspx
 - HTML实体编码：https://zh.rakko.tools/tools/21/
-- 摩斯电码：http://moersima.00cha.net/
-- 摩斯电码：http://www.zhongguosou.com/zonghe/moersicodeconverter.aspx
-- 栅栏密码：https://www.qqxiuzi.cn/bianma/zhalanmima.php
-- 猪圈密码：http://www.hiencode.com/pigpen.html
-- 零宽字符：http://330k.github.io/misc_tools/unicode_steganography.html
 - Base64填充位隐写读取：https://github.com/cjcslhp/wheels/tree/master/b64stego
-- yafu：RSA解题中的因式分解 https://github.com/bbuhrow/yafu
-- factordb：在线大数分解数据库 http://factordb.com/
-- ctfcode：随波逐流工作室 CTF编码工具 http://1o1o.xyz/bo_ctfcode.html
-- quipqiup：在线古典密码词频爆破 https://www.quipqiup.com/
-- 在线求解线性方程组：http://www.yunsuan.info/matrixcomputations/solvelinearsystems.html  
 
-### Misc
+## Misc
+
+### 图片分析
 
 #### 图片隐写
 
@@ -76,22 +85,29 @@
 - OCR在线识别：https://web.baimiaoapp.com/
 - 解决拼图问题：montage+gaps https://github.com/nemanja-m/gaps
 
-#### 音视频
+### 音视频分析
 
 - Audacity：音频隐写 https://www.audacityteam.org/
 - Mp3Stego：Mp3音频隐写 https://www.petitcolas.net/steganography/mp3stego/
 
-#### 流量分析
+### 流量分析
 
 - Pcap流量包在线修复：http://f00l.de/hacking/pcapfix.php
 - knm：鼠标键盘流量包取证 https://github.com/FzWjScJ/knm
 
-#### 日志分析
+### 取证分析
+
+- Volatility：内存取证工具 https://github.com/volatilityfoundation/volatility
+- DiskGenius：磁盘取证工具 https://www.diskgenius.cn/
+- Sleuth Kit：磁盘取证工具 https://github.com/sleuthkit/sleuthkit
+- Autopsy：取证浏览器 https://www.autopsy.com/
+
+### 日志分析
 
 - ProcessMonitor：进程监视器 https://learn.microsoft.com/zh-cn/sysinternals/downloads/procmon
 - Event log explorer：日志查看器 https://www.eventlogxp.com/
 
-#### 数据处理
+### 数据处理
 
 - 010 Editor：https://www.sweetscape.com/010editor/
   - 010 Editor 插件模板下载：例如 ELF.bt https://www.sweetscape.com/010editor/repository/templates/
@@ -99,7 +115,7 @@
 - Binwalk：https://github.com/ReFirmLabs/binwalk
 - 在线正则表达式：https://c.runoob.com/front-end/854/
 
-#### 密码破解
+### 密码破解
 
 - Advanced Office Password Recovery（AOPR）：破解office文档密码 https://www.elcomsoft.com/aopr.html
 - Advanced Archive Password Recovery（ARCHPR）：破解zip和rar文件密码 https://www.elcomsoft.com/archpr.html
@@ -107,39 +123,70 @@
 - ZipCenOp：zip伪加密破解 
 - Ziperello：zip压缩包密码破解
 
-#### 其他
+### 其他
 
 - 在线正则英语单词：https://regdict.com/
 
-### Web
+## Web
 
-- localhost绕过：127.0.0.1  >>> 2130706433 https://www.browserling.com/tools/ip-to-dec
+### 信息泄露
+
 - .git 信息泄露：https://github.com/BugScanTeam/GitHack
 - .svn/.hg/.cvs 信息泄露：https://github.com/kost/dvcs-ripper
+
+### 绕过
+
+- localhost绕过：127.0.0.1  >>> 2130706433 https://www.browserling.com/tools/ip-to-dec
+
+### 其他
+
 - D盾：Webshell查杀 https://www.d99net.net/
 
-### Pwn
+## Pwn
+
+### Pwntools
 
 - Pwntools：CTF框架和漏洞利用开发库 https://github.com/Gallopsled/pwntools
-- Pwndbg：GDB 插件 https://github.com/pwndbg/pwndbg
-- ROPgadget：返回导向式编程 寻找 Gadget https://github.com/JonathanSalwan/ROPgadget
-- Ropper：返回导向式编程 寻找 Gadget https://github.com/sashs/Ropper
+
+### IDA
+
 - idaplugins-list：IDA 插件 https://github.com/onethawt/idaplugins-list
+
+### GDB
+
+- Pwndbg：GDB 插件 https://github.com/pwndbg/pwndbg
+
 - gdb-dashboard：GDB 插件 https://github.com/cyrus-and/gdb-dashboard
 
-### Reverse
+### ROP Gadget
 
-- ExeinfoPE：查壳工具 https://github.com/ExeinfoASL/ASL/raw/master/exeinfope.zip
-- PEiD：查壳工具 https://www.aldeid.com/wiki/PEiD
-- UPX：脱壳工具 https://github.com/upx/upx
+- ROPgadget：返回导向式编程 寻找 Gadget https://github.com/JonathanSalwan/ROPgadget
+- Ropper：返回导向式编程 寻找 Gadget https://github.com/sashs/Ropper
+
+## Reverse
+
+### 逆向工具
+
 - Cutter：https://cutter.re/
 - IDA：https://hex-rays.com/ida-pro/
 - x64DBG：https://x64dbg.com/
 - Ollydbg：https://www.ollydbg.de/
 - bindiff：二进制比对工具 https://www.zynamics.com/software.html
 - angr：二进制分析 https://github.com/angr/angr
+
+### 查壳脱壳
+
+- ExeinfoPE：查壳工具 https://github.com/ExeinfoASL/ASL/raw/master/exeinfope.zip
+- PEiD：查壳工具 https://www.aldeid.com/wiki/PEiD
+- UPX：脱壳工具 https://github.com/upx/upx
+
+### IDA签名库
+
 - sig-database：IDA FLIRT 签名库 https://github.com/push0ebp/sig-database
 - FLIRTDB：IDA FLIRT 签名库 https://github.com/Maktm/FLIRTDB
+
+### Python逆向
+
 - pyinstxtractor：https://github.com/extremecoders-re/pyinstxtractor  
 
 ### 其他
@@ -221,7 +268,7 @@ Exploit.class: compiled Java class data, version 52.0 (Java 1.8)
 openssl rsautl -decrypt -in whoami.txt -inkey private.key out flag.txt
 ```
 
-#### 常用正则表达式
+#### 正则表达式
 
 ##### 中国手机号
 
@@ -439,7 +486,18 @@ f.close()
 \U+ [Hex]: \U+0054\U+0068\U+0065
 ```
 
-#### 图片拼接
+#### 图片分析
+
+图片分析的一般步骤：
+
+1. 首先查看EXIF信息。
+2. 如果图片在windows下能查看，kali下无法查看，说明格式数据错误，可以修改图片的长宽高来显示隐藏图像。
+3. 通过binwalk或者foremost查看是否有隐藏文件。
+4. 通过stegsolve进行色差分析，查看zlib数据段。
+5. 查看文件是否包含有损坏的其他文件，查找文件中是否有可疑字符串，例如flag、key、pass。
+6. 验证是否存在隐写，例如LSB隐写。
+
+##### 图片拼接
 
 沿水平方向拼接：
 
@@ -452,17 +510,6 @@ convert -append *.png ../flag.png
 ```
 convert +append *.png ../flag.png
 ```
-
-#### 图片分析
-
-图片分析的一般步骤：
-
-1. 首先查看EXIF信息。
-2. 如果图片在windows下能查看，kali下无法查看，说明格式数据错误，可以修改图片的长宽高来显示隐藏图像。
-3. 通过binwalk或者foremost查看是否有隐藏文件。
-4. 通过stegsolve进行色差分析，查看zlib数据段。
-5. 查看文件是否包含有损坏的其他文件，查找文件中是否有可疑字符串，例如flag、key、pass。
-6. 验证是否存在隐写，例如LSB隐写。
 
 ##### jpg长宽修改
 
@@ -608,6 +655,41 @@ java -jar ZipCenOp.jar xxx.zip
 4634 -- 注销成功
 4647 -- 用户启动的注销   
 4672 -- 使用超级用户（如管理员）进行登录
+```
+
+#### 磁盘取证
+
+##### 查看文件内容
+
+```
+$ file <filename>
+```
+
+```
+$ mmls <filename>
+```
+
+##### 分区挂载
+
+先查看文件内容：
+
+```
+$ mmls <filename>  
+DOS Partition Table
+Offset Sector: 0
+Units are in 512-byte sectors
+
+      Slot      Start        End          Length       Description
+000:  Meta      0000000000   0000000000   0000000001   Primary Table (#0)
+001:  -------   0000000000   0000000127   0000000128   Unallocated
+002:  000:000   0000000128   0000198783   0000198656   NTFS / exFAT (0x07)
+003:  -------   0000198784   0000204799   0000006016   Unallocated
+```
+
+偏移 128 挂载 NTFS 分区：
+
+```
+$ mkdir /mnt/foo ; mount <fielname> /mnt/foo -o offset=$((128*512))
 ```
 
 ### Web
