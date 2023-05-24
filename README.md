@@ -166,7 +166,7 @@
 
 ## Reverse
 
-### 逆向工具
+### ELF/EXE逆向
 
 - Cutter：https://cutter.re/
 - IDA：https://hex-rays.com/ida-pro/
@@ -175,20 +175,47 @@
 - bindiff：二进制比对工具 https://www.zynamics.com/software.html
 - angr：二进制分析 https://github.com/angr/angr
 
+### Android逆向
+
+- jadx：https://github.com/skylot/jadx
+- JEB：https://www.pnfsoftware.com/
+- GDA：https://github.com/charles2gan/GDA-android-reversing-Tool
+
+### Java逆向
+
+- jd-gui：https://github.com/java-decompiler/jd-gui
+
+### Python逆向
+
+- py2exe：打包工具 https://www.py2exe.org/
+- pyInstaller：打包工具 https://pyinstaller.org/
+- unpy2exe：py2exe 打包程序中提取 .pyc https://github.com/matiasb/unpy2exe
+- pyinstxtractor：pyInstaller 打包程序中提取 .pyc https://github.com/extremecoders-re/pyinstxtractor
+- uncompyle6：字节码文件（.pyc）反编译为源代码（.py） https://github.com/rocky/python-uncompyle6/
+
+### Rust 逆向
+
+- rust-reversing-helper：https://github.com/cha5126568/rust-reversing-helper
+
+### Go 逆向
+
+- golang_loader_assist：https://github.com/strazzere/golang_loader_assist
+- IDAGolangHelper：https://github.com/sibears/IDAGolangHelper
+
 ### 查壳脱壳
 
 - ExeinfoPE：查壳工具 https://github.com/ExeinfoASL/ASL/raw/master/exeinfope.zip
 - PEiD：查壳工具 https://www.aldeid.com/wiki/PEiD
-- UPX：脱壳工具 https://github.com/upx/upx
+- UPX：UPX 脱壳工具 https://github.com/upx/upx
+
+### 符号执行
+
+- Angr：https://docs.angr.io/ 官方实例：https://docs.angr.io/en/latest/examples.html
 
 ### IDA签名库
 
 - sig-database：IDA FLIRT 签名库 https://github.com/push0ebp/sig-database
 - FLIRTDB：IDA FLIRT 签名库 https://github.com/Maktm/FLIRTDB
-
-### Python逆向
-
-- pyinstxtractor：https://github.com/extremecoders-re/pyinstxtractor  
 
 ### 其他
 
@@ -1127,6 +1154,63 @@ sh.recvrepeat(timeout = default)
 sh.interactive()
 ```
 
+## Reverse
 
+### IDA小端顺序
 
-### 
+x86 处理器在内存中按小端（little-endian）顺序（低到高）存放和检索数据。
+
+以 IDA 逆向的某程序为例：
+
+- v8 为数组，大小类型是 8 位，是最小单位，字符串 `:\"AL_RT^L*.?+6/46` 会正向存放在 v8 中：
+
+```
+# 正序，数据为 :\"AL_RT^L*.?+6/46
+char v8[28]; 
+strcpy(v8, ":\"AL_RT^L*.?+6/46");  
+```
+
+- v7 为64位整数，大小类型是 64 位，在内存中要按 1 字节拆分成 8 份，HEX 码为 `68 61 72 61 6D 62 65 00`。字符串将是逆序，即 `harambe0`：
+
+```
+# 逆序，数据为 harambe0
+__int64 v7;  
+v7 = 0x65626D61726168LL; //ebmarah
+```
+
+### ASCII码表
+
+| ASCII值 | 控制字符 | ASCII值 | 控制字符 | ASCII值 | 控制字符 | ASCII值 | 控制字符 |
+| :------ | :------- | :------ | :------- | :------ | :------- | :------ | :------- |
+| 0       | NUT      | 32      | (space)  | 64      | @        | 96      | 、       |
+| 1       | SOH      | 33      | !        | 65      | A        | 97      | a        |
+| 2       | STX      | 34      | "        | 66      | B        | 98      | b        |
+| 3       | ETX      | 35      | #        | 67      | C        | 99      | c        |
+| 4       | EOT      | 36      | $        | 68      | D        | 100     | d        |
+| 5       | ENQ      | 37      | %        | 69      | E        | 101     | e        |
+| 6       | ACK      | 38      | &        | 70      | F        | 102     | f        |
+| 7       | BEL      | 39      | ,        | 71      | G        | 103     | g        |
+| 8       | BS       | 40      | (        | 72      | H        | 104     | h        |
+| 9       | HT       | 41      | )        | 73      | I        | 105     | i        |
+| 10      | LF       | 42      | *        | 74      | J        | 106     | j        |
+| 11      | VT       | 43      | +        | 75      | K        | 107     | k        |
+| 12      | FF       | 44      | ,        | 76      | L        | 108     | l        |
+| 13      | CR       | 45      | -        | 77      | M        | 109     | m        |
+| 14      | SO       | 46      | .        | 78      | N        | 110     | n        |
+| 15      | SI       | 47      | /        | 79      | O        | 111     | o        |
+| 16      | DLE      | 48      | 0        | 80      | P        | 112     | p        |
+| 17      | DCI      | 49      | 1        | 81      | Q        | 113     | q        |
+| 18      | DC2      | 50      | 2        | 82      | R        | 114     | r        |
+| 19      | DC3      | 51      | 3        | 83      | S        | 115     | s        |
+| 20      | DC4      | 52      | 4        | 84      | T        | 116     | t        |
+| 21      | NAK      | 53      | 5        | 85      | U        | 117     | u        |
+| 22      | SYN      | 54      | 6        | 86      | V        | 118     | v        |
+| 23      | TB       | 55      | 7        | 87      | W        | 119     | w        |
+| 24      | CAN      | 56      | 8        | 88      | X        | 120     | x        |
+| 25      | EM       | 57      | 9        | 89      | Y        | 121     | y        |
+| 26      | SUB      | 58      | :        | 90      | Z        | 122     | z        |
+| 27      | ESC      | 59      | ;        | 91      | [        | 123     | {        |
+| 28      | FS       | 60      | <        | 92      | \        | 124     | \|       |
+| 29      | GS       | 61      | =        | 93      | ]        | 125     | }        |
+| 30      | RS       | 62      | >        | 94      | ^        | 126     | `        |
+| 31      | US       | 63      | ?        | 95      | _        | 127     | DEL      |
