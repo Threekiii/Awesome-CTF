@@ -53,6 +53,10 @@
 
 ## Misc
 
+### 综合工具
+
+- PuzzleSolver：Misc工具 https://github.com/Byxs20/PuzzleSolver
+
 ### 图片分析
 
 #### 图片隐写
@@ -101,6 +105,8 @@
 - DiskGenius：磁盘取证工具 https://www.diskgenius.cn/
 - Sleuth Kit：磁盘取证工具 https://github.com/sleuthkit/sleuthkit
 - Autopsy：取证浏览器 https://www.autopsy.com/
+- GIMP：开源图像编辑器 配合Volatility导出的.dmp使用 https://www.gimp.org/
+- ElcomSoft Distributed Password Recovery：BitLocker解密 https://www.elcomsoft.com/edpr.html
 
 ### 日志分析
 
@@ -593,7 +599,7 @@ A5 4A：最后修改文件日期
 4672 -- 使用超级用户（如管理员）进行登录
 ```
 
-### 磁盘取证
+### 取证分析
 
 #### 查看文件内容
 
@@ -627,6 +633,54 @@ Units are in 512-byte sectors
 ```
 $ mkdir /mnt/foo ; mount <fielname> /mnt/foo -o offset=$((128*512))
 ```
+
+#### volatility使用
+
+查看内存镜像系统摘要：
+
+```
+python2 vol.py -f <filename.raw> imageinfo
+```
+
+扫描镜像进程：
+
+```
+python2 vol.py -f <filename.raw> --profile=<profile> psscan
+```
+
+```
+python2 vol.py -f <filename.raw> --profile=<profile> pslist
+```
+
+导出进程数据（.dmp文件）：
+
+```
+python2 vol.py -f <filename.raw> --profile=<profile> memdump -p <pid> -D ./
+```
+
+扫描文件：
+
+```
+python2 vol.py -f <filename.raw> --profile=<profile> filescan | grep zip
+```
+
+```
+python2 vol.py -f <filename.raw> --profile=<profile> filescan | grep txt
+```
+
+```
+python2 vol.py -f <filename.raw> --profile=<profile> filescan | grep flag
+```
+
+导出文件：
+
+```
+python2 vol.py -f <filename.raw> --profile=<profile> dumpfiles -Q <文件地址0x00> -D outfile
+```
+
+#### GIMP使用
+
+volatility dump进程，将.dmp后缀改为.data，用GIMP打开，调整高度、位移、宽度。
 
 ### 数据分析
 
