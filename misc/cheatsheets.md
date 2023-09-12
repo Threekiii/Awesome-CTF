@@ -8,8 +8,6 @@
 openssl rsautl -decrypt -in whoami.txt -inkey private.key out flag.txt
 ```
 
-伪加密：
-
 ## 图片分析
 
 ### 步骤方法
@@ -20,6 +18,24 @@ openssl rsautl -decrypt -in whoami.txt -inkey private.key out flag.txt
 4. 通过stegsolve进行色差分析，查看zlib数据段。
 5. 查看文件是否包含有损坏的其他文件，查找文件中是否有可疑字符串，例如flag、key、pass。
 6. 验证是否存在隐写，例如LSB隐写。
+
+### 图片隐写
+
+```
+# binwalk pic.jpg
+ 
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             JPEG image data, JFIF standard 1.01
+382           0x17E           Copyright string: "Copyright (c) 1998 Hewlett-Packard Company"
+3192          0xC78           TIFF image data, big-endian, offset of first image directory: 8
+140147        0x22373         JPEG image data, JFIF standard 1.01
+140177        0x22391         TIFF image data, big-endian, offset of first image directory: 8
+```
+
+```
+# dd if=pic.jpg of=outfile.jpg skip=140147 bs=1
+```
 
 ### 图片拼接
 
@@ -82,108 +98,6 @@ convert +append *.png ../flag.png
 
 - [qrcode_painter_1.py](https://github.com/Threekiii/Awesome-CTF/blob/master/scripts/misc/qrcode_painter_1.py)
 - [qrcode_painter_2.py](
-
-## 流量分析
-
-### wireshark
-
-过滤IP：
-
-```
-ip.src eq xxx.xxx.xxx.xxx or ip.dst eq xxx.xxx.xxx.xxx
-```
-
-```
-ip.addr eq xxx.xxx.xxx.xxx
-```
-
-过滤端口：
-
-```
-tcp.port eq 80 or udp.port eq 80
-```
-
-```
-tcp.dstport == 80 or tcp.srcport == 80
-```
-
-```
-tcp.port >=1 and tcp.port <=80
-```
-
-过滤协议：
-
-```
-tcp/udp/arp/icmp/http/ftp/dns/ip
-```
-
-过滤MAC：
-
-```
-eth.dst == A0:04:C6:85:63:73
-```
-
-HTTP过滤：
-
-```
-http.request.method == "GET"
-```
-
-```
-http.request.method == "POST"
-```
-
-```
-http.request.uri == "/img/logo.png"
-```
-
-```
-http contains "GET"
-```
-
-```
-http contains "HTTP/1."
-```
-
-```
-http.request.method == "GET" && http contains "User-Agent:"
-```
-
-### tshark
-
-```
-tshark -r **.pcap –Y ** -T fields –e ** | **** > data
-----------------------------------------------------------------
-tshark -r capture.pcapng -T fields -e usb.capdata > data2.txt
-```
-
-```
-Usage:
-  -Y <display filter>      packet displaY filter in Wireshark display filter
-                           syntax
-  -T pdml|ps|psml|json|jsonraw|ek|tabs|text|fields|?
-                           format of text output (def: text)
-  -e <field>               field to print if -Tfields selected (e.g. tcp.port,
-                           _ws.col.Info)
-```
-
-通过`-Y`过滤器 (与 wireshark 一致), 然后用`-T filds -e`配合指定显示的数据段 (比如 usb.capdata)
-
-`-e`后的参数不确定可以由 `wireshark` 右击需要的数据选中后得到
-
-配合python使用：
-
-```python
-from os import system
-
-system("tshark -r icmp_data.pcap -Y \"icmp && icmp.type==8\" -T fields -e data > flag.txt")
-f = open('flag.txt', 'r')
-flag = ''
-for line in f.readlines():
-    flag += chr(int(line[16:18], 16))
-print(flag)
-f.close()
-```
 
 ## 压缩包分析
 
@@ -297,85 +211,3 @@ java -jar ZipCenOp.jar xxx.zip
 4672 -- 使用超级用户（如管理员）进行登录
 ```
 
-## 取证分析
-
-### 查看文件内容
-
-```
-$ file <filename>
-```
-
-```
-$ mmls <filename>
-```
-
-### 分区挂载
-
-先查看文件内容：
-
-```
-$ mmls <filename>  
-DOS Partition Table
-Offset Sector: 0
-Units are in 512-byte sectors
-
-      Slot      Start        End          Length       Description
-000:  Meta      0000000000   0000000000   0000000001   Primary Table (#0)
-001:  -------   0000000000   0000000127   0000000128   Unallocated
-002:  000:000   0000000128   0000198783   0000198656   NTFS / exFAT (0x07)
-003:  -------   0000198784   0000204799   0000006016   Unallocated
-```
-
-偏移 128 挂载 NTFS 分区：
-
-```
-$ mkdir /mnt/foo ; mount <fielname> /mnt/foo -o offset=$((128*512))
-```
-
-### volatility2使用
-
-查看内存镜像系统摘要：
-
-```
-python2 vol.py -f <filename.raw> imageinfo
-```
-
-扫描镜像进程：
-
-```
-python2 vol.py -f <filename.raw> --profile=<profile> psscan
-```
-
-```
-python2 vol.py -f <filename.raw> --profile=<profile> pslist
-```
-
-导出进程数据（.dmp文件）：
-
-```
-python2 vol.py -f <filename.raw> --profile=<profile> memdump -p <pid> -D ./
-```
-
-扫描文件：
-
-```
-python2 vol.py -f <filename.raw> --profile=<profile> filescan | grep zip
-```
-
-```
-python2 vol.py -f <filename.raw> --profile=<profile> filescan | grep txt
-```
-
-```
-python2 vol.py -f <filename.raw> --profile=<profile> filescan | grep flag
-```
-
-导出文件：
-
-```
-python2 vol.py -f <filename.raw> --profile=<profile> dumpfiles -Q <文件地址0x00> -D outfile
-```
-
-### GIMP使用
-
-volatility dump进程，将.dmp后缀改为.data，用GIMP打开，调整高度、位移、宽度。

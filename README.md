@@ -125,6 +125,7 @@
 
 ### 密码破解
 
+- aircrack-ng：破解wifi密码 https://github.com/aircrack-ng/aircrack-ng
 - Advanced Office Password Recovery（AOPR）：破解office文档密码 https://www.elcomsoft.com/aopr.html
 - Advanced Archive Password Recovery（ARCHPR）：破解zip和rar文件密码 https://www.elcomsoft.com/archpr.html
 - crc32：CRC32爆破 https://github.com/theonlypwner/crc32
