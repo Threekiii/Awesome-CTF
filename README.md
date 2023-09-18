@@ -103,11 +103,15 @@
 ### 取证分析
 
 - Volatility：内存取证工具 https://github.com/volatilityfoundation/volatility
+- Volatility3：https://github.com/volatilityfoundation/volatility3
 - DiskGenius：磁盘取证工具 https://www.diskgenius.cn/
 - Sleuth Kit：磁盘取证工具 https://github.com/sleuthkit/sleuthkit
 - Autopsy：取证浏览器 https://www.autopsy.com/
+- LogForensics：web日志取证分析工具 https://security.tencent.com/index.php/opensource/detail/15
 - GIMP：开源图像编辑器 配合Volatility导出的.dmp使用 https://www.gimp.org/
 - ElcomSoft Distributed Password Recovery：BitLocker解密 https://www.elcomsoft.com/edpr.html
+- pyvmx-cracker：.vmx密码破解 https://github.com/axcheron/pyvmx-cracker
+- VMwareVMX：.vmx配置数据解密 https://github.com/RF3/VMwareVMX
 
 ### 日志分析
 
@@ -131,6 +135,7 @@
 - crc32：CRC32爆破 https://github.com/theonlypwner/crc32
 - ZipCenOp：zip伪加密破解 
 - Ziperello：zip压缩包密码破解
+- c-jwt-cracker：JWT Token爆破 https://github.com/brendan-rius/c-jwt-cracker
 
 ### 其他
 
