@@ -136,6 +136,7 @@
 - ZipCenOp：zip伪加密破解 
 - Ziperello：zip压缩包密码破解
 - c-jwt-cracker：JWT Token爆破 https://github.com/brendan-rius/c-jwt-cracker
+- how-does-Xmanager-encrypt-password：Xmanager 密码解密 https://github.com/HyperSine/how-does-Xmanager-encrypt-password
 
 ### 其他
 

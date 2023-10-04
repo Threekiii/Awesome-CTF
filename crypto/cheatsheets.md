@@ -10,6 +10,15 @@
 %4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2
 ```
 
+## John the Ripper
+
+### Linux
+
+```
+$ unshadow /etc/passwd /etc/shadow > pass.txt
+$ john --wordlist=/PATH/TO/WORDLIST pass.txt
+```
+
 ## Features
 
 ### base64
