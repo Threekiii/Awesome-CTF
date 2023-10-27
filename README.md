@@ -15,6 +15,7 @@
 - CTF Wiki：https://ctf-wiki.org/
 - CTF Hub：https://www.ctfhub.com/
 - CTF Time：https://ctftime.org/
+- AWD-Guide：https://github.com/AabyssZG/AWD-Guide
 - 攻防世界：https://adworld.xctf.org.cn/
 - Hacker 101：https://www.hacker101.com/
 - Cryptopals：密码学练习题目 https://cryptopals.com/
