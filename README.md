@@ -2,13 +2,51 @@
 
 **【免责声明】本项目所涉及的技术、思路和工具仅供学习，任何人不得将其用于非法用途和盈利，不得将其用于非授权渗透测试，否则后果自行承担，与本项目无关。使用本项目前请先阅读 [法律法规](https://github.com/Threekiii/Awesome-Laws)。**
 
-## WriteUp
+- [开源导航](#%E5%BC%80%E6%BA%90%E5%AF%BC%E8%88%AA)
+- [Crypto](#crypto)
+	- [综合工具](#%E7%BB%BC%E5%90%88%E5%B7%A5%E5%85%B7)
+	- [密码学](#%E5%AF%86%E7%A0%81%E5%AD%A6)
+	- [数学计算](#%E6%95%B0%E5%AD%A6%E8%AE%A1%E7%AE%97)
+	- [编解码](#%E7%BC%96%E8%A7%A3%E7%A0%81)
+- [Misc](#misc)
+	- [综合工具](#%E7%BB%BC%E5%90%88%E5%B7%A5%E5%85%B7)
+	- [图片分析](#%E5%9B%BE%E7%89%87%E5%88%86%E6%9E%90)
+		- [图片隐写](#%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99)
+		- [图片EXIF](#%E5%9B%BE%E7%89%87exif)
+		- [二维码](#%E4%BA%8C%E7%BB%B4%E7%A0%81)
+		- [图片杂项](#%E5%9B%BE%E7%89%87%E6%9D%82%E9%A1%B9)
+	- [音视频分析](#%E9%9F%B3%E8%A7%86%E9%A2%91%E5%88%86%E6%9E%90)
+	- [流量分析](#%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90)
+	- [取证分析](#%E5%8F%96%E8%AF%81%E5%88%86%E6%9E%90)
+	- [日志分析](#%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90)
+	- [数据处理](#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86)
+	- [密码破解](#%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3)
+	- [基线加固](#%E5%9F%BA%E7%BA%BF%E5%8A%A0%E5%9B%BA)
+	- [应急响应](#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94)
+	- [物联网](#%E7%89%A9%E8%81%94%E7%BD%91)
+	- [其他](#%E5%85%B6%E4%BB%96)
+- [Web](#web)
+	- [信息泄露](#%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2)
+	- [绕过](#%E7%BB%95%E8%BF%87)
+	- [其他](#%E5%85%B6%E4%BB%96)
+- [Pwn](#pwn)
+	- [Pwntools](#pwntools)
+	- [IDA](#ida)
+	- [GDB](#gdb)
+	- [ROP Gadget](#rop-gadget)
+- [Reverse](#reverse)
+	- [ELF/EXE逆向](#elfexe%E9%80%86%E5%90%91)
+	- [Android逆向](#android%E9%80%86%E5%90%91)
+	- [Java逆向](#java%E9%80%86%E5%90%91)
+	- [Python逆向](#python%E9%80%86%E5%90%91)
+	- [Rust 逆向](#rust-%E9%80%86%E5%90%91)
+	- [Go 逆向](#go-%E9%80%86%E5%90%91)
+	- [查壳脱壳](#%E6%9F%A5%E5%A3%B3%E8%84%B1%E5%A3%B3)
+	- [符号执行](#%E7%AC%A6%E5%8F%B7%E6%89%A7%E8%A1%8C)
+	- [IDA签名库](#ida%E7%AD%BE%E5%90%8D%E5%BA%93)
+	- [其他](#%E5%85%B6%E4%BB%96)
 
-年更选手，不定时更新：
 
-- 2023 年春秋杯网络安全联赛春季赛 pytrans
-- 2023 年第二届陇剑杯决赛 win
-- 2023 年第二届陇剑杯决赛 shiro
 
 ## 开源导航
 
@@ -86,18 +124,18 @@
 - Magicexif元数据编辑器：https://www.magicexif.com/
 - TweakPNG：png图像编辑器，修改元数据 https://entropymine.com/jason/tweakpng/
 
-#### 二维码
-
-- 在线绘制二维码/汉信码：https://www.pixilart.com/draw?ref=home-page
-- 在线绘制二维码：https://merricx.github.io/qrazybox/
-- 在线扫描一维码：https://online-barcode-reader.inliteresearch.com/
-
 #### 图片杂项
 
 - Ezgif：在线分帧 https://ezgif.com/split
 - 盲水印提取：https://github.com/chishaxie/BlindWaterMark
 - OCR在线识别：https://web.baimiaoapp.com/
 - 解决拼图问题：montage+gaps https://github.com/nemanja-m/gaps
+
+#### 二维码
+
+- 在线绘制二维码/汉信码：https://www.pixilart.com/draw?ref=home-page
+- 在线绘制二维码：https://merricx.github.io/qrazybox/
+- 在线扫描一维码：https://online-barcode-reader.inliteresearch.com/
 
 ### 音视频分析
 
@@ -111,30 +149,32 @@
 
 ### 取证分析
 
-- Volatility：内存取证工具 https://github.com/volatilityfoundation/volatility
-- Volatility3：https://github.com/volatilityfoundation/volatility3
+#### 磁盘取证
+
 - DiskGenius：磁盘取证工具 https://www.diskgenius.cn/
 - Sleuth Kit：磁盘取证工具 https://github.com/sleuthkit/sleuthkit
-- Autopsy：取证浏览器 https://www.autopsy.com/
-- LogForensics：web日志取证分析工具 https://security.tencent.com/index.php/opensource/detail/15
-- GIMP：开源图像编辑器 配合Volatility导出的.dmp使用 https://www.gimp.org/
+- Autopsy：磁盘取证浏览器 https://www.autopsy.com/
 - ElcomSoft Distributed Password Recovery：BitLocker解密 https://www.elcomsoft.com/edpr.html
 - pyvmx-cracker：.vmx密码破解 https://github.com/axcheron/pyvmx-cracker
 - VMwareVMX：.vmx配置数据解密 https://github.com/RF3/VMwareVMX
 
-### 日志分析
+#### 内存取证
 
+- Volatility：内存取证工具 https://github.com/volatilityfoundation/volatility
+- Volatility3：https://github.com/volatilityfoundation/volatility3
+- GIMP：开源图像编辑器 配合Volatility导出的.dmp使用 https://www.gimp.org/
+
+#### 日志取证
+
+- LogForensics：web日志取证分析工具 https://security.tencent.com/index.php/opensource/detail/15
 - ProcessMonitor：进程监视器 https://learn.microsoft.com/zh-cn/sysinternals/downloads/procmon
 - Event log explorer：日志查看器 https://www.eventlogxp.com/
 
-### 数据处理
+### 木马分析
 
-- 010 Editor：https://www.sweetscape.com/010editor/
-  - 010 Editor 插件模板下载：例如 ELF.bt https://www.sweetscape.com/010editor/repository/templates/
-
-- Binwalk：https://github.com/ReFirmLabs/binwalk
-- 在线正则表达式：https://c.runoob.com/front-end/854/
-- 在线正则表达式：https://regex101.com/
+- CS_Decrypt：CobaltStrike流量解密 https://github.com/5ime/CS_Decrypt
+- godzilla_decryptor：Godzilla流量解密https://github.com/Threekiii/Awesome-Redteam/blob/master/scripts/Godzilla_Decryptor/godzilla_decryptor.py
+- BlueTeamTools：综合工具 冰蝎1.x-3.x Godzilla1.x-4.x流量解密 https://github.com/abc123info/BlueTeamTools
 
 ### 密码破解
 
@@ -146,6 +186,23 @@
 - Ziperello：zip压缩包密码破解
 - c-jwt-cracker：JWT Token爆破 https://github.com/brendan-rius/c-jwt-cracker
 - how-does-Xmanager-encrypt-password：Xmanager 密码解密 https://github.com/HyperSine/how-does-Xmanager-encrypt-password
+
+### 基线加固
+
+- Benchmarks：常用服务器、数据库、中间件安全配置基线 https://github.com/AV1080p/Benchmarks
+- Shell_Script：Linux 系统检测和加固脚本 https://github.com/xiaoyunjie/Shell_Script
+
+### 数据处理
+
+- 010 Editor：https://www.sweetscape.com/010editor/
+  - 010 Editor 插件模板下载：例如 ELF.bt https://www.sweetscape.com/010editor/repository/templates/
+- Binwalk：https://github.com/ReFirmLabs/binwalk
+- 在线正则表达式：https://c.runoob.com/front-end/854/
+- 在线正则表达式：https://regex101.com/
+
+### 物联网
+
+- QEMU：https://wiki.qemu.org/Documentation
 
 ### 其他
 
