@@ -93,6 +93,7 @@ CTF 常见竞赛模式：
 - ctfcode：随波逐流工作室 CTF编码工具 http://1o1o.xyz/bo_ctfcode.html
 - XSSEE：在线综合编解码 https://evilcos.me/lab/xssee/
 - MeTools：在线综合编解码 http://www.metools.info/code/quotedprintable231.html
+- Ciphey：全自动加解密/编解码 基于 Python https://github.com/Ciphey/Ciphey
 
 ### 加解密
 
@@ -218,6 +219,9 @@ CTF 常见竞赛模式：
 
 ### 密码破解
 
+- crunch：字典生成
+	- Kali/Linux：https://sourceforge.net/projects/crunch-wordlist
+	- Windows：https://github.com/shadwork/Windows-Crunch
 - aircrack-ng：破解wifi密码 https://github.com/aircrack-ng/aircrack-ng
 - Advanced Office Password Recovery（AOPR）：破解office文档密码 https://www.elcomsoft.com/aopr.html
 - Advanced Archive Password Recovery（ARCHPR）：破解zip和rar文件密码 https://www.elcomsoft.com/archpr.html
