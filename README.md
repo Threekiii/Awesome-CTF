@@ -214,7 +214,7 @@ CTF 常见竞赛模式：
 ### 木马分析
 
 - CS_Decrypt：CobaltStrike流量解密 https://github.com/5ime/CS_Decrypt
-- godzilla_decryptor：Godzilla流量解密https://github.com/Threekiii/Awesome-Redteam/blob/master/scripts/Godzilla_Decryptor/godzilla_decryptor.py
+- godzilla_decryptor：Godzilla流量解密 https://github.com/Threekiii/Awesome-Redteam/blob/master/scripts/Godzilla_Decryptor/godzilla_decryptor.py
 - BlueTeamTools：综合工具 冰蝎1.x-3.x Godzilla1.x-4.x流量解密 https://github.com/abc123info/BlueTeamTools
 
 ### 密码破解
