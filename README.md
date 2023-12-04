@@ -91,8 +91,12 @@ CTF 常见竞赛模式：
 - OK Tools在线工具：https://github.com/wangyiwy/oktools
 - CTF 在线工具：http://www.hiencode.com/
 - ctfcode：随波逐流工作室 CTF编码工具 http://1o1o.xyz/bo_ctfcode.html
+- CaptfEncoder：离线综合工具 https://github.com/guyoung/CaptfEncoder
 - XSSEE：在线综合编解码 https://evilcos.me/lab/xssee/
-- MeTools：在线综合编解码 http://www.metools.info/code/quotedprintable231.html
+- MeTools：在线综合编解码 http://www.metools.info/
+- 107000工具站：在线综合编解码 https://www.107000.com/ 
+- atoolbox：在线综合编解码 http://www.atoolbox.net/
+- sojson：在线综合编解码 https://www.sojson.com/
 - Ciphey：全自动加解密/编解码 基于 Python https://github.com/Ciphey/Ciphey
 
 ### 加解密
@@ -106,10 +110,15 @@ CTF 常见竞赛模式：
 
 ### 编解码
 
-- MD5 Hash：https://www.somd5.com/
+- MD5 Hash
+	- https://www.somd5.com/
+	- http://www.ttmd5.com/hash.php
+	- https://www.cmd5.com/
+- Unicode
+	- Unicode字符表：https://www.52unicode.com/enclosed-alphanumerics-zifu
+	- Unicode：https://www.compart.com/en/unicode/
+
 - GB2312：http://code.mcdvisa.com/
-- Unicode字符表：https://www.52unicode.com/enclosed-alphanumerics-zifu
-- Unicode：https://www.compart.com/en/unicode/
 - UUencode：http://web.chacuo.net/charsetuuencode
 - XXencode：输入文本以每三个字节为单位进行编码 http://web.chacuo.net/charsetxxencode
 - Escape/Unescape：https://tool.chinaz.com/tools/escape.aspx
