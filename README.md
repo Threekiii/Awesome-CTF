@@ -1,7 +1,6 @@
 # Awesome-CTF
 
 **【免责声明】本项目所涉及的技术、思路和工具仅供学习，任何人不得将其用于非法用途和盈利，不得将其用于非授权渗透测试，否则后果自行承担，与本项目无关。使用本项目前请先阅读 [法律法规](https://github.com/Threekiii/Awesome-Laws)。**
-
 ## Roadmap
 
 ![](images/image-20231122-1.png)
@@ -83,8 +82,13 @@ CTF 常见竞赛模式：
 - CTF Tools：https://github.com/zardus/ctf-tools
 - 近期赛事：https://su-sanha.cn/events/ API：http://event.ctf.probius.xyz/cn_CTF
 
+## Writeups Collection
+
+- CTF writeups from P4 Team：https://github.com/p4-team/ctf
+
 ## Crypto
 
+*Tools used for solving Crypto challenges.*
 ### 综合工具
 
 - CyberChef：综合编解码及加密，可本地部署 https://github.com/gchq/CyberChef
@@ -107,13 +111,16 @@ CTF 常见竞赛模式：
 - 猪圈密码：http://www.hiencode.com/pigpen.html
 - 零宽字符：http://330k.github.io/misc_tools/unicode_steganography.html
 - quipqiup：在线古典密码词频爆破 https://www.quipqiup.com/
-
-### 编解码
-
+- rabbit：https://asecuritysite.com/encryption/rabbit2
 - MD5 Hash
 	- https://www.somd5.com/
 	- http://www.ttmd5.com/hash.php
 	- https://www.cmd5.com/
+	- https://crackstation.net/
+- 加密算法模板：https://github.com/a568972484/The_encryption_template_Python
+
+### 编解码
+
 - Unicode
 	- Unicode字符表：https://www.52unicode.com/enclosed-alphanumerics-zifu
 	- Unicode：https://www.compart.com/en/unicode/
@@ -184,6 +191,8 @@ CTF 常见竞赛模式：
 
 ### 取证分析
 
+_Tools used for solving Forensics challenges_
+
 #### 磁盘取证
 
 - DiskGenius：磁盘取证工具 https://www.diskgenius.cn/
@@ -212,7 +221,6 @@ CTF 常见竞赛模式：
 - hindsight：Chrome/Chromium取证 https://github.com/obsidianforensics/hindsight
 - HackBrowserData：浏览器导出解密 https://github.com/moonD4rk/HackBrowserData
 
-
 #### 鼠标/键盘取证
 
 - knm：鼠标键盘流量包取证 https://github.com/FzWjScJ/knm
@@ -228,9 +236,12 @@ CTF 常见竞赛模式：
 
 ### 密码破解
 
+_Tools used for various kind of bruteforcing (passwords etc.)_
+
 - crunch：字典生成
 	- Kali/Linux：https://sourceforge.net/projects/crunch-wordlist
 	- Windows：https://github.com/shadwork/Windows-Crunch
+- pydictor：字典生成 md5计算 https://github.com/LandGrey/pydictor/blob/master/README_CN.md
 - aircrack-ng：破解wifi密码 https://github.com/aircrack-ng/aircrack-ng
 - Advanced Office Password Recovery（AOPR）：破解office文档密码 https://www.elcomsoft.com/aopr.html
 - Advanced Archive Password Recovery（ARCHPR）：破解zip和rar文件密码 https://www.elcomsoft.com/archpr.html

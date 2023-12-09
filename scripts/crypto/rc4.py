@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 # @Author  : Threekiii
 # @Time    : 2023/5/12 15:32
-# @Function: RC4 解密脚本
+# @Function: RC4 Decryption
 
 import base64
 def rc4_main(key = "init_key", message = "init_message"):
     s_box = rc4_init_sbox(key)
     crypt = rc4_excrypt(message, s_box)
     return crypt
+
 def rc4_init_sbox(key):
     s_box = list(range(256))
-    print("初始的s盒：{}".format(s_box))
+    print("[Initial S-Box]: {}".format(s_box))
     j = 0
     for i in range(256):
         j = (j + s_box[i] + ord(key[i % len(key)])) % 256
         s_box[i], s_box[j] = s_box[j], s_box[i]
-    print("打乱后s盒：{}".format(s_box))
+    print("[Random S-Box]: {}".format(s_box))
     return s_box
 def rc4_excrypt(plain, box):
     plain = base64.b64decode(plain.encode('utf-8'))
@@ -41,6 +42,6 @@ if __name__ == "__main__":
     s=str(base64.b64encode(s.encode('utf-8')), 'utf-8')
     result = rc4_main(key, s)
     print("*"*100)
-    print("【密文】：{}".format(input))
-    print("【key】：{}".format(key))
-    print("【解密结果】：{}".format(result))
+    print("[Cipher]: {}".format(input))
+    print("[Key]: {}".format(key))
+    print("[Plain Text Result]: {}".format(result))
