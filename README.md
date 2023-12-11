@@ -141,6 +141,8 @@ CTF 常见竞赛模式：
 
 ## Misc
 
+*Tools used for solving Misc challenges.*
+
 ### 综合工具
 
 - PuzzleSolver：Misc工具 https://github.com/Byxs20/PuzzleSolver
@@ -191,7 +193,7 @@ CTF 常见竞赛模式：
 
 ### 取证分析
 
-_Tools used for solving Forensics challenges_
+_Tools used for solving Forensics challenges_.
 
 #### 磁盘取证
 
@@ -317,7 +319,6 @@ _Tools used for various kind of bruteforcing (passwords etc.)_
 ### Angr
 
 - Angr：符号执行 https://docs.angr.io/ 官方实例：https://docs.angr.io/en/latest/examples.html
-
 
 ## Reverse
 
